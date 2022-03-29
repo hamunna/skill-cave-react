@@ -1,21 +1,17 @@
 import React from "react";
-import { useHistory, useLocation } from "react-router";
-import useAuth from "../../hooks/useAuth";
+import { Button } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+import useFirebase from "../../hooks/useFirebase";
 
 const SignIn = () => {
-    const { signInUsingGoogle, setIsLoading } = useAuth();
 
-    const history = useHistory();
-    const location = useLocation();
-    const redirect_uri = location.state?.from || "/";
+    const { signInWithGoogle } = useFirebase();
+
+    const navigate = useNavigate("/");
 
     // Google SignIn Handle
-    const handleGoogleLogin = () => {
-        signInUsingGoogle()
-            .then((result) => {
-                history.push(redirect_uri);
-            })
-            .finally(() => setIsLoading(false));
+    const handleGoogleSignIn = () => {
+        signInWithGoogle(navigate);
     };
 
     return (
@@ -24,17 +20,23 @@ const SignIn = () => {
                 sign In
             </h1>
 
-            <button
-                style={{ border: "none", outline: "none" }}
-                onClick={handleGoogleLogin}
+            <Button
+                style={{
+                    border: "none",
+                    outline: "none",
+                    backgroundColor: "#fff",
+                }}
+                onClick={handleGoogleSignIn}
             >
                 <img
                     style={{ width: "300px" }}
                     src="https://onymos.com/wp-content/uploads/2020/10/google-signin-button.png"
                     alt=""
                 />
-            </button>
+            </Button>
         </div>
+
+        // <h1>Hello SignIn Page</h1>
     );
 };
 

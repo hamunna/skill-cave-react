@@ -1,57 +1,55 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
-import initializeAuthentication from "../Firebase/firebase.init"
+import {
+    GoogleAuthProvider,
+    getAuth,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut,
+} from "firebase/auth";
+import { useState, useEffect } from "react";
+import initializeFirebase from "../Firebase/firebase.init";
 
-initializeAuthentication();
-
+initializeFirebase();
 const useFirebase = () => {
-	const [user, setUser] = useState({});
-	const [error, setError] = useState('');
-	const [success, setSuccess] = useState('');
-	const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState({});
 
-	const googleProvider = new GoogleAuthProvider();
-	const auth = getAuth();
+    const googleProvider = new GoogleAuthProvider();
+    const auth = getAuth();
 
-	// Sign In Using Google Account
-	const signInUsingGoogle = () => {
-		setIsLoading(true)
-		return signInWithPopup(auth, googleProvider)
+    // Google SignIn Process
+    const signInWithGoogle = (navigate) => {
+        signInWithPopup(auth, googleProvider).then((result) => {
+            const user = result.user;
 
-	}
+            navigate("/");
+        });
+    };
 
-	// On Auth State Change to Observe user State
-	useEffect(() => {
-		const unsubscribed = onAuthStateChanged(auth, user => {
-			if (user) {
-				setUser(user);
-			} else {
-				setUser({})
-			}
-			setIsLoading(false)
-		})
-		return () => unsubscribed;
+    // Observe User State Process
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUser(user);
+            } else {
+                setUser({});
+            }
+        });
+        return () => unsubscribe;
+    }, [auth]);
 
-	}, []);
+    // SignOut Process
+    const logOut = () => {
+        signOut(auth)
+            .then(() => {
+                // window.confirm('Please Confirm Log-Out Request!');
+            })
+            .catch((error) => {});
+    };
 
-	const logOut = () => {
-		setIsLoading(true)
-		signOut(auth)
-			.then(() => { })
-			.finally(() => setIsLoading(false))
-	}
-
-	return {
-		user,
-		isLoading,
-		error,
-		success,
-		signInUsingGoogle,
-		logOut,
-		setIsLoading,
-		setError,
-		setSuccess
-	}
-}
+    return {
+        user,
+        signInWithGoogle,
+        logOut,
+    };
+};
 
 export default useFirebase;
