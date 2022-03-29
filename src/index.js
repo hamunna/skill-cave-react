@@ -1,22 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './Pages/Home/Home';
-import SignIn from './Pages/SignIn/SignIn';
+import Home from "./Pages/Home/Home";
+import SignIn from "./Pages/SignIn/SignIn";
+import PrivateRoute from "./hooks/Private/PrivateRoute/PrivateRoute";
+import AuthProvider from "./Context/AuthProvider";
 
 ReactDOM.render(
     <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/home" element={<Home />} />
+        <AuthProvider>
+            <Routes>
+                {/* <PrivateRoute> */}
+                    <Route path="/" element={<App />} />
+                    <Route path="/home" element={<Home />} />
+                {/* </PrivateRoute> */}
+                <Route path="/signIn" element={<SignIn />} />
 
-            <Route path="/signIn" element={<SignIn />} />
-        </Routes>
+                {/* <Route path="/private">
+                    <Route
+                        path="/"
+                        element={
+                            <PrivateRoute>
+                                <App />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/home"
+                        element={
+                            <PrivateRoute>
+                                <Home />
+                            </PrivateRoute>
+                        }
+                    />
+                </Route> */}
+            </Routes>
+        </AuthProvider>
     </BrowserRouter>,
     document.getElementById("root")
 );

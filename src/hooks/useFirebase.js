@@ -11,6 +11,7 @@ import initializeFirebase from "../Firebase/firebase.init";
 initializeFirebase();
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const googleProvider = new GoogleAuthProvider();
     const auth = getAuth();
@@ -21,6 +22,7 @@ const useFirebase = () => {
             const user = result.user;
 
             navigate("/");
+            setIsLoading(true)
         });
     };
 
