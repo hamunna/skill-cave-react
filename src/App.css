@@ -1,38 +1,93 @@
-.App {
+.theme-primary-text {
+  color: #153439;
+}
+
+.theme-secondary-text {
+  color: #ff7c5b;
+}
+
+.theme-primary-btn {
+  background-color: rgb(21, 52, 57);
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.theme-primary-btn:hover {
+  background-color: rgb(20, 79, 88);
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.theme-secondary-btn {
+  background-color: rgb(255, 124, 91);
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.theme-secondary-btn:hover {
+  background-color: rgb(209, 73, 39);
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.motives-list li {
+  list-style-type: none;
+  margin-bottom: 10px;
+  color: rgb(20, 79, 88);
+  font-weight: 700;
+}
+
+#hero-section {
+  height: 700px;
+  background-image: url('https://www.uoguelph.ca/fare/files/Teacher%20in%20classroom.jpg');
+  background-size: cover;
+  /* background-position: 0 -200px; */
+}
+
+#hero-section .hero-bg-overlay {
+  height: 700px;
+  width: 100%;
+  background-color: rgba(10, 10, 10, 0.8);
+  /* background: linear-gradient(90deg, rgba(131,58,180,0.5) 0%, rgba(122,55,187,0.5) 0%, rgba(130,49,218,0.5) 0%, rgba(13, 63, 3, 0.5) 50%, rgba(245,252,69,0.5) 100%); */
+}
+
+.hero-content {
   text-align: center;
+  padding-top: 200px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hero-content h1 {
+  font-size: 3.5vw;
+  font-weight: 700;
+  letter-spacing: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.service-img-height{
+  height: 200px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
